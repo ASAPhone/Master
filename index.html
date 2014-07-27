@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <title>Automatic Status Adjustment for Phone</title>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBp37T05asGoDR1Yxfs4NQ3GrvQqSBD0Os&sensor=true"></script>
+    <link rel="stylesheet" href="/css/interface.min.css" />
+    <link rel="stylesheet" href="/css/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="/css/jquery.mobile.structure-1.4.3.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.mobile-1.4.3.min.js"></script>
+    <script type="text/javascript" src="/js/defaultScenes.js"></script>
+    <script type="text/javascript" src="/js/getInfo.js"></script>
+    <script type="text/javascript" src="/js/listener.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <!--   real setting api                         -->
+    <!--    <script src="/js/setting.js"></script>   -->
+
+    <!--   fake setting api start                         -->
+    <script type="text/javascript" src="/js/fakeApi.js"></script>
+    <script type="text/javascript" src="/js/Fake_setting.js"></script>
+    <!--   fake setting api end                         -->
+    <script type="text/javascript" src="/js/userScenes.js"></script>
+    <script type="text/javascript" src="/js/temp.js"></script>
+</head>
+
+<body>
+    <!-- Start of first page : #homePage -->
+    <div data-role="page" id="homePage">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <h1>ASAP</h1>
+            <a href="#optionPage" data-transition="slide" class="ui-btn ui-corner-all ui-btn-right ui-icon-bars ui-btn-icon-notext"></a>
+        </div>
+        <div data-role="content">
+        </div>
+    </div>
+
+    <!-- Start of the second page : #optionPage -->
+    <div data-role="page" id="optionPage">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#homePage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+            <h1>Options</h1>
+        </div>
+        <div data-role="content">
+            <a href="#settingPage" data-transition="slide" data-role="button" class="ui-btn ui-icon-carat-r ui-btn-icon-right">Setting</a>
+            <a href="#addScenes" data-transition="slide" data-role="button" class="ui-btn ui-icon-plus ui-btn-icon-right">Scenes</a>
+            <a href="#aboutUsPage" data-transition="slide" data-role="button" class="ui-btn ui-icon-carat-r ui-btn-icon-right">About us</a>
+        </div>
+    </div>
+
+    <!-- Start of the third page : #settingPage -->
+    <div data-role="page" id="settingPage" style="padding: 0px">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#optionPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+            <h1>Setting</h1>
+        </div>
+        <div data-role="content" id="settingContent" style="padding-top: 0px">
+            <div data-role="collapsible-set" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-inset="false">
+                <div data-role="collapsible" data-collapsed="false">
+                    <h3>GENERAL</h3>
+                    <label for="tipsOption" style="display: inline">Tips</label>
+                    <select id="tipsOptionId" name="tipsOption" data-role="slider" data-mini="true" data-theme="a">
+                        <option value="false">Off</option>
+                        <option value="true" selected>On</option>
+                    </select>
+                    <br>
+                    <label for="geoOption" style="display: inline">Location Monitor</label>
+                    <select name="geoOption" id="geoOptionId" data-role="slider" data-mini="true" data-theme="a">
+                        <option value="false">Off</option>
+                        <option value="true" selected>On</option>
+                    </select>
+                    <br>
+                    <label for="autoDetectTZOp" style="display: inline">Auto Detect Time Zone</label>
+                    <select name="autoDetectTZOp" id="autoDetectTZOp" data-role="slider" data-mini="true" data-theme="a">
+                        <option value="false">Off</option>
+                        <option value="true" selected>On</option>
+                    </select>
+                    <br>
+                    <label for="batteryOption" style="display: inline">Battery Monitor</label>
+                    <select name="batteryOption" id="batteryOptionId" data-role="slider" data-mini="true" data-theme="a">
+                        <option value="false">Off</option>
+                        <option value="true" selected>On</option>
+                    </select>
+                    <br>
+                    <label for="ambientOption" style="display: inline">Ambient Light Monitor</label>
+                    <select name="ambientOption" id="ambientOptionId" data-role="slider" data-mini="true" data-theme="a">
+                        <option value="false">Off</option>
+                        <option value="true" selected>On</option>
+                    </select>
+                    <br>
+                    <label for="sleepModeOption" style="display: inline">Sleep Mode</label>
+                    <select name="sleepModeOption" id="sleepModeOptionId" data-role="slider" data-mini="true" data-theme="a">
+                        <option value="false" selected>Off</option>
+                        <option value="true">On</option>
+                    </select>
+                </div>
+                <div data-role="collapsible">
+                    <h3>ADVANCED</h3>
+                    <a href="#addBlackList" data-transition="slide" data-role="button" class="ui-btn ui-icon-carat-r ui-btn-icon-right">Add Black List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start of the third page : #addScenes -->
+    <div data-role="page" id="addScenes">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#optionPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+            <h1>Add Scenes</h1>
+        </div>
+    </div>
+
+    <!-- Start of the third page : #aboutUsPage -->
+    <div data-role="page" id="aboutUsPage">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#optionPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+            <h1>About Us</h1>
+        </div>
+        <div data-role="content">
+            <p>We are the team,"Do we best, Never give up".</p>
+            <br>
+            <p>This firefox os app is called, Device Auto Set Mode.
+                <br>It can change mode of your device in proper condition automatically.
+                <br>Also, it can do something that you expected when specific situation occurred.
+                <br>
+            </p>
+        </div>
+    </div>
+
+    <!-- Start of the forth page : #addBlackList -->
+    <div data-role="page" id="addBlackList">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#settingPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+            <h1>Add to Blacklist</h1>
+        </div>
+        <div data-role="content">
+            <div style="text-align: center" class="ui-field-contain">
+                <label for="targetContacts">Phone Number:</label>
+                <input style="border: 1px black solid" type="text" name="targetContacts" id="targetContacts">
+                <input type="button" id="btnTargetContacts" onclick="findContact()" value="Add to black list">
+            </div>
+            <a href="#searching" data-transition="slide" data-role="button" class="ui-btn ui-corner-all ui-icon-carat-r ui-btn-icon-right">Add from contacts</a>
+            <div data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-inset="false">
+                <h3>People in black list</h3>
+                <p id="addInBlackList">No data....</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start of the forth page : #searching -->
+    <div data-role="page" id="searching">
+        <div data-role="header" data-position="fixed" data-theme="a">
+            <a href="#addBlackList" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
+            <h1>Searching</h1>
+        </div>
+        <div>
+            <!--<label for="searchTargetContacts">Name:</label>-->
+            <!--<input style="border: 1px black solid" type="text" name="searchTargetContacts" id="searchTargetContacts">-->
+            <!--put the contacts here-->
+        </div>
+    </div>
+
+    <!--    這邊是要給使用者在查看通訊錄(要把誰加進黑名單)時搜索    -->
+    <!--    Enter the name in contacts: <input type="text" id="targetContacts"><br>    -->
+    <!--    <button onclick="findContact()">Search</button>    -->
+    <!--    <div id = "blackListRelativeToSearch">No relative....</div>    -->
+    <!--    <div style="display:none" id="resultReveal">Hidden</div>    -->
+
+    <!-- Nothing working just for google place api -->
+    <div id="googleplace"></div>
+</body>
+
+</html>

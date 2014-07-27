@@ -1,0 +1,49 @@
+{
+	"name": "ASAP",
+	"description": "Automatic Status Adjustment for Phone",
+	"launch_path": "/index.html",
+
+	"icons": {
+	    "16": "/img/logo16.png",
+	    "32": "/img/logo32.png",
+	    "48": "/img/logo48.png",
+	    "64": "/img/logo64.png",
+	    "128": "/img/logo128.png"
+	},
+
+	"developer":
+	{
+		"name": "Do we best, Never give up",
+		"url": "http://www.nutn.edu.tw/index-ch.htm"
+	},
+
+	"default_locale": "en",
+
+	"permissions":
+	{
+		"geolocation":
+		{
+			"description": "Obtain the current location of the user."
+		},
+
+		"desktop-notification": {
+			"description": "Allows to display notifications on the user's desktop."
+		},
+
+		"settings": {
+      		"description": "Access all telephony-related APIs to make and recieve phone calls.",
+      		"access": "readwrite"
+    	},
+
+    	"alarms": {
+      		"description": "alarm"
+    	}
+	},
+
+	"type": "certified",
+
+	"chrome":
+	{
+		"navigation": "true"
+	}
+}
