@@ -21,8 +21,8 @@ function initialization() {
 
 $("document").ready(function() {
     //when app start turn on location, battery, time zone, and ambient light monitor
-    initialization();
-
+    //initialization();
+    
     /*
         Page: settingPage
      */

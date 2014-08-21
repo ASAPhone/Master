@@ -9,7 +9,7 @@
 function setWifi(check) {
     var lock = navigator.mozSettings.createLock();
     var result = lock.set({
-        'wifi.enabled': check;
+        'wifi.enabled': check
     });
 
     result.onsuccess = function() {
@@ -27,7 +27,7 @@ function setWifi(check) {
 function setGps(check) {
     var lock = navigator.mozSettings.createLock();
     var result = lock.set({
-        'geolocation.enabled': check;
+        'geolocation.enabled': check
     });
 
     result.onsuccess = function() {
@@ -45,7 +45,7 @@ function setGps(check) {
 function setWap(check) {
     var lock = navigator.mozSettings.createLock();
     var result = lock.set({
-        'ril.data.enabled': check;
+        'ril.data.enabled': check
     });
 
     result.onsuccess = function() {
@@ -145,7 +145,7 @@ function setVibration(check) {
 function setPowerSaving(check) {
     var lock = navigator.mozSettings.createLock();
     var result = lock.set({
-        'powersave.enabled': check;
+        'powersave.enabled': check
     });
 
     result.onsuccess = function() {
