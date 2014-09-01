@@ -17,6 +17,15 @@ function getDeviceTime() {
 }
 
 /*
+    取得黑名單的資料（來源：自己設定的黑名單、或手機內部的）
+ */
+/*
+function getBlackList() {
+
+}
+*/
+
+/*
     取得Google Place API回傳的資料
 
     Google Place API:

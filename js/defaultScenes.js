@@ -1,18 +1,9 @@
-/**
- *This is a JS code to change screen light by detecting ambient light.
- */
-function Auto_ScreenLight(ambient_event) {
-    if (ambient_event.value < 9) {
-        SetScreenAutoBrightness(true);
-    }
-}
-
 /*
  * This is a JS code to limit phone call when speed exceed 20 km/h.
  */
 function SpeedShow(position) {
-    var speed = position.coords.speed;
-    //var speed = 40; //fake speed
+    //var speed = position.coords.speed;
+    var speed = 40; //fake speed
     if (speed > 5.55555556) {
         SetPhoneCallLimited(true);
     } else {
@@ -53,9 +44,10 @@ function Auto_SpeedLimited() {
  */
 function sleepMode(check) {
     if (check) {
+        alert("Sleep Mode has started.");
         setPowerSaving(check);
         setSound(0);
-        alert("Sleep Mode has started.");
+        alert("Have you set clock?");
     } else {
         setPowerSaving(check);
         alert("Sleep Mode has stopped.");

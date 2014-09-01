@@ -1,0 +1,26 @@
+.bl_row {
+    border-bottom: 1px solid #3D3D3D;
+    height: 30px;
+    line-height: 30px;
+    margin: 0px;
+    min-height: 30px;
+    padding: 0px;
+    width: 100%;
+}
+.bl_left_content {
+    margin: 0px;
+    display: inline-block;
+    font-size: 14px;
+    padding-left: 10px;
+    text-align: left;
+    width: 40%;
+}
+.bl_right_content {
+    background-color: #ADADAD;
+    display: inline-block;
+    font-size: 14px;
+    height: 29px;
+    padding-left: 10px;
+    text-align: left;
+    width: 60%;
+}

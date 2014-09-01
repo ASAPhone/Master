@@ -1,5 +1,6 @@
 {
   "name": "ASAP",
+  "type": "certified",
   "description": "Automatic Status Adjustment for Phone",
   "launch_path": "/index.html",
   "icons": {
@@ -27,10 +28,21 @@
     },
     "alarms": {
       "description": "alarm"
+    },
+    "telephony": {
+      "description": "telephony"
+    },
+    "camera": {
+      "description": "Required for accessing cameras on the device."
+    },
+    "time": {
+      "description": "Set current time. Time zone information is controlled by the Settings API. Formerly called systemclock."
+    },
+    "wifi-manage": {
+      "description": "Enumerate available WiFi networks, get signal strength, connect to a network."
+    },
+    "storage": {
+      "description": "Utilize storage (appcache, pinned apps, IndexedDB) without size limitations. See appcache, IndexedDB."
     }
-  },
-  "type": "certified",
-  "chrome": {
-    "navigation": "true"
   }
 }

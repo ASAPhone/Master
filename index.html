@@ -1,176 +1,496 @@
 <!DOCTYPE html>
+<!--HTML5 doctype-->
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBp37T05asGoDR1Yxfs4NQ3GrvQqSBD0Os&sensor=true"></script>
+    <link rel="stylesheet" type="text/css" href="flatly/css/flatly.min.css" class="uib-framework-theme">
+    <link rel="stylesheet" type="text/css" href="css/myCustom.css">
+    <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
     <title>Automatic Status Adjustment for Phone</title>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBp37T05asGoDR1Yxfs4NQ3GrvQqSBD0Os&sensor=true"></script>
-    <link rel="stylesheet" href="css/interface.min.css" />
-    <link rel="stylesheet" href="css/jquery.mobile.icons.min.css" />
-    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.3.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/app.css">
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mobile-1.4.3.min.js"></script>
-    <script type="text/javascript" src="js/defaultScenes.js"></script>
-    <script type="text/javascript" src="js/getInfo.js"></script>
-    <script type="text/javascript" src="js/listener.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-    <!--   real setting api                         -->
-    <script src="js/setting.js"></script>
-
-    <!--   fake setting api start                         -->
-    <!-- <script type="text/javascript" src="/js/fakeApi.js"></script>
-    <script type="text/javascript" src="/js/Fake_setting.js"></script>
-    <!   fake setting api end                         -->
-    <script type="text/javascript" src="js/userScenes.js"></script>
-    <script type="text/javascript" src="js/temp.js"></script>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <script type="application/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+    <script type="application/javascript" src="sidebar/js/jquery.event.move.js"></script>
+    <script type="application/javascript" src="sidebar/js/jquery.event.swipe.js"></script>
+    <script type="application/javascript" src="sidebar/js/sidebar.js"></script>
+    <script type="application/javascript" src="sidebar/js/swipe.js"></script>
+    <script type="application/javascript" src="js/index_user_scripts.js"></script>
+    <script type="application/javascript" src="js/bs_subpage.js"></script>
+    <!-- black list include -->
+    <script type="application/javascript" src="blackList/blackList.js"></script>
+    <link rel="stylesheet" type="text/css" href="blackList/blackList.css">
+    <!-- jquery ui bootstrap -->
+    <script type="application/javascript" src="jquery-ui-bootstrap/jquery-ui-1.10.3.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery-ui-bootstrap/jquery-ui-1.10.3.custom.css">
+    <!-- functions for asap -->
+    <script type="application/javascript" src="js/listener.js"></script>
+    <script type="application/javascript" src="js/userScenes.js"></script>
+    <script type="application/javascript" src="js/getInfo.js"></script>
+    <script type="application/javascript" src="js/setting.js"></script>
+    <!-- location search -->
+    <script type="application/javascript" src="locSearch/locSearch.js"></script>
+    <link rel="stylesheet" type="text/css" href="locSearch/locSearch.css">
 </head>
 
 <body>
-    <!-- Start of first page : #homePage -->
-    <div data-role="page" id="homePage">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <h1>ASAP</h1>
-            <a href="#optionPage" data-transition="slide" class="ui-btn ui-corner-all ui-btn-right ui-icon-bars ui-btn-icon-notext"></a>
-        </div>
-        <div data-role="content">
-        </div>
-    </div>
-
-    <!-- Start of the second page : #optionPage -->
-    <div data-role="page" id="optionPage">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <a href="#homePage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-            <h1>Options</h1>
-        </div>
-        <div data-role="content">
-            <a href="#settingPage" data-transition="slide" data-role="button" class="ui-btn ui-icon-carat-r ui-btn-icon-right">Setting</a>
-            <a href="#addScenes" data-transition="slide" data-role="button" class="ui-btn ui-icon-plus ui-btn-icon-right">Scenes</a>
-            <a href="#aboutUsPage" data-transition="slide" data-role="button" class="ui-btn ui-icon-carat-r ui-btn-icon-right">About us</a>
-        </div>
-    </div>
-
-    <!-- Start of the third page : #settingPage -->
-    <div data-role="page" id="settingPage" style="padding: 0px">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <a href="#optionPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-            <h1>Setting</h1>
-        </div>
-        <div data-role="content" id="settingContent" style="padding-top: 0px">
-            <div data-role="collapsible-set" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-inset="false">
-                <div data-role="collapsible" data-collapsed="false">
-                    <h3>GENERAL</h3>
-                    <label for="tipsOption" style="display: inline">Tips</label>
-                    <select id="tipsOptionId" name="tipsOption" data-role="slider" data-mini="true" data-theme="a">
-                        <option value="false">Off</option>
-                        <option value="true" selected>On</option>
-                    </select>
-                    <br>
-                    <label for="geoOption" style="display: inline">Location Monitor</label>
-                    <select name="geoOption" id="geoOptionId" data-role="slider" data-mini="true" data-theme="a">
-                        <option value="false">Off</option>
-                        <option value="true" selected>On</option>
-                    </select>
-                    <br>
-                    <label for="autoDetectTZOp" style="display: inline">Auto Detect Time Zone</label>
-                    <select name="autoDetectTZOp" id="autoDetectTZOp" data-role="slider" data-mini="true" data-theme="a">
-                        <option value="false">Off</option>
-                        <option value="true" selected>On</option>
-                    </select>
-                    <br>
-                    <label for="batteryOption" style="display: inline">Battery Monitor</label>
-                    <select name="batteryOption" id="batteryOptionId" data-role="slider" data-mini="true" data-theme="a">
-                        <option value="false">Off</option>
-                        <option value="true" selected>On</option>
-                    </select>
-                    <br>
-                    <label for="ambientOption" style="display: inline">Ambient Light Monitor</label>
-                    <select name="ambientOption" id="ambientOptionId" data-role="slider" data-mini="true" data-theme="a">
-                        <option value="false">Off</option>
-                        <option value="true" selected>On</option>
-                    </select>
-                    <br>
-                    <label for="sleepModeOption" style="display: inline">Sleep Mode</label>
-                    <select name="sleepModeOption" id="sleepModeOptionId" data-role="slider" data-mini="true" data-theme="a">
-                        <option value="false" selected>Off</option>
-                        <option value="true">On</option>
-                    </select>
+    <!-- content goes here-->
+    <div class="uwrap">
+        <div class="upage" id="homePage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_1 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>ASAP</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_2 btn-myHeader btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="hm_btn_options"><i class="glyphicon glyphicon-list" data-position="icon only"></i>
+                        </button>
+                    </div>
                 </div>
-                <div data-role="collapsible">
-                    <h3>ADVANCED</h3>
-                    <a href="#addBlackList" data-transition="slide" data-role="button" class="ui-btn ui-icon-carat-r ui-btn-icon-right">Add Black List</a>
+                <div id="homePagesub" class="upage-content">
+                    <div class="grid urow uib_row_5 homepage_page_myContent" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_6 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col hm_content_senarios">
+                                <div id="scenario_0" class="scenarioForm" data-scenarioname="fasdf">
+                                    <div id="contentIF" class="hidden">IF
+                                        <div id="IfTime" class="contentIfForm" data-hours="2" data-minutes="2">Time: 02:02</div>
+                                        <div id="IfBattery" class="contentIfForm" data-bcharging="1" data-blevel="2">Battery charging: true
+                                            <br>Battery Level: 02%</div>
+                                        <div id="IfLoc" class="contentIfForm" data-pname="McDonald麥當勞" data-lat="25.084732" data-lng="121.43851999999993" data-address="台灣新北市五股區成泰路二段121號" data-locradius="20">Place: McDonald麥當勞
+                                            <br>Address: 台灣新北市五股區成泰路二段121號
+                                            <br>Within: 20 meter(s)</div>
+                                        <div id="IfSpeed" class="contentIfForm" data-speed="23">Speed : 23km/hr</div>
+                                        <div id="Ifdriver" class="contentIfForm" data-driving="1">Driving : on</div>
+                                        <div id="Ifmotion" class="contentIfForm" data-bodyacts="1">Activity : Standing</div>
+                                        <div id="IfphCall" class="contentIfForm" data-name="fdsaf" data-phnum="32432">Name : fdsaf
+                                            <br>Phone number : 32432</div>
+                                        <div id="IfSettings" class="contentIfForm" data-wifi="0" data-bluetooth="1" data-gps="1" data-wap="1">WiFi : Off
+                                            <br>Bluetooth : On
+                                            <br>Geolocation : On
+                                            <br>Mobile Network : On</div>
+                                    </div>
+                                    <div id="contentTHEN" class="hidden">THEN
+                                        <div id="ThenSound" class="contentThenForm" data-mainv="1" data-alarmv="1">Main volume: 1
+                                            <br>Alarm volume: 1</div>
+                                        <div id="ThenVibrate" class="contentThenForm" data-vtime="1" data-vtillcancel="0">Vibrating Time: 01 seconds
+                                            <br>Vibrating till cancel : No</div>
+                                        <div id="ThenSrcLt" class="contentThenForm" data-scrltvalue="0.4" data-autoscrlt="0">Screen brightness : weak
+                                            <br>Screen brightness automatic adjustment : off</div>
+                                        <div id="ThenSettings" class="contentThenForm" data-twifi="1" data-tbluetooth="1" data-tgps="1" data-twap="1" data-tpsg="1">WiFi : on
+                                            <br>Bluetooth : on
+                                            <br>Geolocation : on
+                                            <br>Mobile Network : on
+                                            <br>Power Saving : on</div>
+                                        <div id="ThenPhCall" class="contentThenForm" data-actname="fsadf" data-actphnum="234">Name : fsadf
+                                            <br>Phone number : 234</div>
+                                        <div id="ThenCamera" class="contentThenForm" data-tcamera="0">Camera: unable</div>
+                                        <div id="ThenSlpM" class="contentThenForm" data-tsleep="0">Sleep mode: off</div>
+                                    </div>
+                                    <div class="scenarioFormText">
+                                        <div class="scenarioFormName">fasdf</div>
+                                        <div class="scenarioFormTime">Time: 23:10:22</div>
+                                    </div>
+                                    <div class="scenarioFormBtn">
+                                        <div id="scenarioDel"><i class="glyphicon glyphicon-trash" data-position="icon only"></i>
+                                        </div>
+                                        <div id="scenarioEdit"><i class="glyphicon glyphicon-pencil" data-position="icon only"></i>
+                                        </div>
+                                        <div id="scenarioInfo"><i class="glyphicon glyphicon-exclamation-sign" data-position="icon only"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden">
+                                <input type="text" id="tempScenarioName">
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="inner-element uib_w_3 uib_sidebar rightbar bar-bg hm_sidebar_pos swipe" data-uib="layout/right_sidebar" data-ver="0" data-anim="{'style':'overlap', 'v':200, 'side':'right'}" id="home_sidebar">
+                    <div class="sidebar-content">
+                        <div class="grid urow uib_row_2 row-height-2" data-uib="layout/row" data-ver="0">
+                            <div class="col uib_col_2 col-0_12-12" data-uib="layout/col" data-ver="0">
+                                <div class="widget-container content-area vertical-col">
+                                    <button type="button" class="btn widget uib_w_4 btn-addscenes input-l" data-uib="twitter%20bootstrap/button" data-ver="0" id="hm_sdb_addScense" style="height: 45px"><i class="glyphicon glyphicon-plus button-icon-left" data-position="left"></i>Add Scenarios</button>
+                                    <button type="button" class="btn widget uib_w_5 btn-blackList" data-uib="twitter%20bootstrap/button" data-ver="0" id="hm_sdb_blackList" style="height: 45px"><i class="glyphicon glyphicon-list-alt button-icon-left" data-position="left"></i>Black List</button>
+                                    <button type="button" class="btn widget uib_w_6 btn-settings" data-uib="twitter%20bootstrap/button" data-ver="0" id="hm_sdb_settings" style="height: 45px"><i class="glyphicon glyphicon-cog button-icon-left" data-position="left"></i>Settings</button>
+                                    <button type="button" class="btn widget uib_w_7 btn-aboutus" data-uib="twitter%20bootstrap/button" data-ver="0" id="hm_sdb_about_us" style="height: 45px"><i class="glyphicon glyphicon-hand-right button-icon-left" data-position="left"></i>About us</button>
+                                    <span class="uib_shim"></span>
+                                </div>
+                            </div>
+                            <span class="uib_shim"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- /upage-outer -->
         </div>
-    </div>
-
-    <!-- Start of the third page : #addScenes -->
-    <div data-role="page" id="addScenes">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <a href="#optionPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-            <h1>Add Scenes</h1>
-        </div>
-    </div>
-
-    <!-- Start of the third page : #aboutUsPage -->
-    <div data-role="page" id="aboutUsPage">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <a href="#optionPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-            <h1>About Us</h1>
-        </div>
-        <div data-role="content">
-            <p>We are the team,"Do we best, Never give up".</p>
-            <br>
-            <p>This firefox os app is called, Device Auto Set Mode.
-                <br>It can change mode of your device in proper condition automatically.
-                <br>Also, it can do something that you expected when specific situation occurred.
-                <br>
-            </p>
-        </div>
-    </div>
-
-    <!-- Start of the forth page : #addBlackList -->
-    <div data-role="page" id="addBlackList">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <a href="#settingPage" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-            <h1>Add to Blacklist</h1>
-        </div>
-        <div data-role="content">
-            <div style="text-align: center" class="ui-field-contain">
-                <label for="targetContacts">Phone Number:</label>
-                <input style="border: 1px black solid" type="text" name="targetContacts" id="targetContacts">
-                <input type="button" id="btnTargetContacts" onclick="findContact()" value="Add to black list">
+        <div class="upage hidden" id="addScenesPage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_8 uib-header-fixed" id="addScenesId" data-uib="layout/header" data-ver="0">
+                    <h2 id="addScenarioT">Add Scenarios</h2>
+                    <!-- edit scenario default hidden -->
+                    <h2 id="editScenarioT" class="hidden">Edit</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_9 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_add_funs"><i class="glyphicon glyphicon-th" data-position="icon only"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="addScenesPagesub" class="upage-content ">
+                    <div class="grid urow uib_row_3 hm_my_content" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_3 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col" id="cIFAndcTHEN">
+                                <div id="contentIF">IF</div>
+                                <div id="contentTHEN">THEN</div>
+                            </div>
+                            <div class="hidden">
+                                <input type="text" id="scenarioEditName" value="">
+                                <input type="text" id="scenarioEditId" value="">
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_10" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_11 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_add_cancel">Cancel<i class="glyphicon"></i>
+                        </button>
+                        <button type="button" class="hidden btn widget uib_w_16 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_edit_cancel"><i class="glyphicon button-icon-left" data-position="left"></i>Cancel</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_12 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_add_add"><i class="glyphicon button-icon-left" data-position="left"></i>Add</button>
+                        <!-- edit button default hidden -->
+                        <button type="button" class="hidden btn widget uib_w_17 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_edit_save"><i class="glyphicon button-icon-left" data-position="left"></i>Save</button>
+                    </div>
+                </div>
             </div>
-            <a href="#searching" data-transition="slide" data-role="button" class="ui-btn ui-corner-all ui-icon-carat-r ui-btn-icon-right">Add from contacts</a>
-            <div data-role="collapsible" data-collapsed-icon="carat-r" data-expanded-icon="carat-d" data-inset="false">
-                <h3>People in black list</h3>
-                <p id="addInBlackList">No data....</p>
+            <!-- /upage-outer -->
+        </div>
+        <div class="upage hidden" id="locSelectPage">
+            <div id="locSelectPageSub">
+                <input id="loc_sel_inp_search" class="loc_sel_controls" type="text" placeholder="Search Box">
+                <div id="loc_sel_map_canvas">
+                </div>
             </div>
+            <div id="locSelectFooter">
+                <button type="button" class="btn widget btn-locSelectCancel" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_loc_sel_cance">Cancel<i class="glyphicon"></i>
+                </button>
+            </div>
+            <!-- /upage-outer -->
         </div>
+        <div class="upage hidden" id="addScenesEdit">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_13 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>Edit Scene</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_14 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_edit_funs"><i class="glyphicon glyphicon-th" data-position="icon only"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="addScenesEditsub" class="upage-content ">
+                    <div class="grid urow uib_row_4 hm_my_content" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_5 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_15" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_16 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_edit_cancel"><i class="glyphicon button-icon-left" data-position="left"></i>Cancel</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_17 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_scene_edit_save"><i class="glyphicon button-icon-left" data-position="left"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /upage-outer -->
+        </div>
+        <div class="upage hidden" id="blackListPage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_18 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>Black List</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_19 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_blist_back"><i class="glyphicon glyphicon-home" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_22 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_hd_bl_clear_all"><i class="glyphicon button-icon-left" data-position="left"></i>Clear All</button>
+                    </div>
+                </div>
+                <div id="blackListPagesub" class="upage-content ">
+                    <div class="grid urow uib_row_6 hm_my_content" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_7 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col blackListPagesubContent">
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_20" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered">
+                        <button type="button" class="btn widget uib_w_21 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_bl_bt_add"><i class="glyphicon glyphicon-plus" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+            </div>
+            <!-- /upage-outer -->
+        </div>
+        <div class="upage hidden" id="blackListAdd">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_23 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>Black List</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_27 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_bl_add_clear"><i class="glyphicon button-icon-left" data-position="left"></i>Clear</button>
+                    </div>
+                </div>
+                <div id="blackListAddsub" class="upage-content ">
+                    <div class="grid urow uib_row_7 hm_my_content grid-pad" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_8 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col" id="blackListAddContent">
+                                <div class="table-thing widget uib_w_28" data-uib="twitter%20bootstrap/input" data-ver="0">
+                                    <label class="narrow-control label-top-left">Name</label>
+                                    <input class="wide-control form-control" type="text" placeholder="Text (ex. John)" name="inp_bl_add_name" id="inp_bl_add_name">
+                                </div>
+                                <div class="table-thing widget uib_w_29" data-uib="twitter%20bootstrap/input" data-ver="0">
+                                    <label class="narrow-control label-top-left">Phone Number</label>
+                                    <input class="wide-control form-control" type="text" placeholder="Only Number" name="inp_bl_add_phNum" id="inp_bl_add_phNum">
+                                </div>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_24" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_25 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_bl_add_cancel"><i class="glyphicon button-icon-left" data-position="left"></i>Cancel</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_26 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_bl_add_add"><i class="glyphicon button-icon-left" data-position="left"></i>Add</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /upage-outer -->
+        </div>
+        <div class="upage hidden" id="blackListEdit">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_30 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>Edit Name/Phone</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div id="blackListEditsub" class="upage-content ">
+                    <div class="grid urow uib_row_8 hm_my_content grid-pad" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_9 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col" id="blackListEditContent">
+                                <div class="table-thing widget uib_w_34" data-uib="twitter%20bootstrap/input" data-ver="0">
+                                    <input type="hidden" id="inp_bl_edit_key">
+                                    <label class="narrow-control label-top-left">Name</label>
+                                    <input class="wide-control form-control" type="text" name="inp_bl_edit_name" id="inp_bl_edit_name">
+                                </div>
+                                <div class="table-thing widget uib_w_35" data-uib="twitter%20bootstrap/input" data-ver="0">
+                                    <label class="narrow-control label-top-left">Phone Number</label>
+                                    <input class="wide-control form-control" type="text" name="inp_bl_edit_phNum" id="inp_bl_edit_phNum">
+                                </div>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+                <div class="uib-footer uib-footer-fixed footer-bg container-group inner-element uib_w_31" data-uib="layout/footer" data-ver="0">
+                    <h2></h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_32 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_bl_edit_cancel"><i class="glyphicon button-icon-left" data-position="left"></i>Cancel</button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button type="button" class="btn widget uib_w_33 btn-myFooter btn_footer_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_bl_edit_save"><i class="glyphicon button-icon-left" data-position="left"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /upage-outer -->
+        </div>
+        <div class="upage hidden" id="settingsPage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_36 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>Settings</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_37 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_settings_back"><i class="glyphicon glyphicon-home" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div id="settingsPagesub" class="upage-content ">
+                    <div class="grid urow uib_row_9 settings_page_myContent" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_12 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="grid grid-pad urow uib_row_10 row-height-10" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_14 col-1_6-12_6-6" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="widget uib_w_38" data-uib="media/text" data-ver="0" id="text_locMon">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle"></div>
+                                                <div>
+                                                    <p>Location Monitor
+                                                        <br>
+                                                        <span style="font-size: 10px; padding-left: 2px; color: #3D3D3D">(≥ 1 minute)</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_15 col-1_5-12_5-6" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="table-thing widget uib_w_39" data-uib="twitter%20bootstrap/input" data-ver="0">
+                                                <input class="wide-control form-control input-sm" type="number" placeholder="minutes &ge; 1" value="1" name="inp_set_locMon_min" id="inp_set_locMon_min">
+                                                <label class="narrow-control label-inline">&nbsp;min(s)</label>
+                                            </div>
+                                            <span class="uib_shim">test</span>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_13 col-1_1-12_1-6" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <label class="checkbox widget uib_w_40" data-uib="twitter%20bootstrap/checkbox" data-ver="0">
+                                                <input type="checkbox" name="set_locMon_check" id="set_locMon_check">
+                                            </label>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+                                <div class="grid grid-pad urow uib_row_11 row-height-11" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_17 col-1_11-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="widget uib_w_41" data-uib="media/text" data-ver="0" id="text_batteryMon">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle"></div>
+                                                <div>
+                                                    <p>Battery Monitor</p>
+                                                </div>
+                                            </div>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_16 col-1_1-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <label class="checkbox widget uib_w_42" data-uib="twitter%20bootstrap/checkbox" data-ver="0">
+                                                <input type="checkbox" name="set_btyMon_check" id="set_btyMon_check">
+                                            </label>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+                                <div class="grid grid-pad urow uib_row_12 row-height-12" data-uib="layout/row" data-ver="0">
+                                    <div class="col uib_col_19 col-1_11-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <div class="widget uib_w_43" data-uib="media/text" data-ver="0" id="text_tips">
+                                                <div class="widget-container left-receptacle"></div>
+                                                <div class="widget-container right-receptacle"></div>
+                                                <div>
+                                                    <p>Tips</p>
+                                                </div>
+                                            </div>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col uib_col_18 col-1_1-12" data-uib="layout/col" data-ver="0">
+                                        <div class="widget-container content-area vertical-col">
+                                            <label class="checkbox widget uib_w_44" data-uib="twitter%20bootstrap/checkbox" data-ver="0">
+                                                <input type="checkbox" name="set_tips_check" id="set_tips_check">
+                                            </label>
+                                            <span class="uib_shim"></span>
+                                        </div>
+                                    </div>
+                                    <span class="uib_shim"></span>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /upage-outer -->
+        </div>
+        <div class="upage hidden" id="aboutUsPage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_45 uib-header-fixed" data-uib="layout/header" data-ver="0">
+                    <h2>About us</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button type="button" class="btn widget uib_w_46 btn-myHeader  btn_header_size" data-uib="twitter%20bootstrap/button" data-ver="0" id="btn_about_us_back"><i class="glyphicon glyphicon-home" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div id="aboutUsPagesub" class="upage-content ">
+                    <div class="grid grid-pad urow uib_row_13 settings_page_myContent" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_20 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <div class="widget uib_w_47" data-uib="media/text" data-ver="0" id="text_about_us">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div>
+                                        <p>We are team,"Do we best, Never give up".</p>
+                                        <p>Developers:
+                                            <br>　　Shih-Hao Huang
+                                            <br>　　Jian-Jhe Hong
+                                            <br>　　Cheng-Han Wu
+                                            <br>　　Ci-Ruei Jiang</p>
+                                        <p>School:
+                                            <br>　　National University of Tainan</p>
+
+                                        <p>Department:
+                                            <br>　　Information Engineering</p>
+                                        <p>Project Moderator:
+                                            <br>　　lloyd Haung</p>
+                                        <p>Advisor:
+                                            <br>　　Chow-Sing Lin</p>
+                                        <p></p>
+                                        <p>This firefox os app is called,
+                                            <br>"Automatic Status Adjustment for Phone"-"ASAP".</p>
+                                        <p>It can adjust status of your device in the conditions that you want automatically.</p>
+                                        <p>Also, it can do the activity that you expected when the specific situation has occurred.</p>
+                                        <p>Thank you for using this APP.</p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /upage-outer -->
+        </div>
+        <!-- /upage -->
     </div>
-
-    <!-- Start of the forth page : #searching -->
-    <div data-role="page" id="searching">
-        <div data-role="header" data-position="fixed" data-theme="a">
-            <a href="#addBlackList" data-transition="slide" data-direction="reverse" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext"></a>
-            <h1>Searching</h1>
-        </div>
-        <div>
-            <!--<label for="searchTargetContacts">Name:</label>-->
-            <!--<input style="border: 1px black solid" type="text" name="searchTargetContacts" id="searchTargetContacts">-->
-            <!--put the contacts here-->
-        </div>
-    </div>
-
-    <!--    這邊是要給使用者在查看通訊錄(要把誰加進黑名單)時搜索    -->
-    <!--    Enter the name in contacts: <input type="text" id="targetContacts"><br>    -->
-    <!--    <button onclick="findContact()">Search</button>    -->
-    <!--    <div id = "blackListRelativeToSearch">No relative....</div>    -->
-    <!--    <div style="display:none" id="resultReveal">Hidden</div>    -->
-
-    <!-- Nothing working just for google place api -->
-    <div id="googleplace"></div>
+    <!-- /uwrap -->
 </body>
 
 </html>

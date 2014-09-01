@@ -1,0 +1,43 @@
+@gutter_r1: 20px;
+
+.uib_row_10 > .col { padding-left:(@gutter_r1 / 2); padding-right:(@gutter_r1 / 2); }
+
+@media all and (min-width: @wp_2) {
+  .uib_col_14     { width:42%;}
+  .urow.cright       > .uib_col_14     { padding-left: 0px !important;}
+  .urow:not(.cright) > .uib_col_14     { clear:left; padding-left: 0px !important; }
+  .uib_col_15     { width:25%;}
+  .uib_col_23     { width:25%;}
+  .uib_col_13     { width:8%;}
+  .urow:not(.cright) > .uib_col_13     { padding-right:0px !important;}
+  .urow.cright       > .uib_col_13     { clear:right; padding-right:0px !important; }
+}
+
+@media all and (min-width: @wp_3) and (max-width: @wp_2){
+  .uib_col_14.uib_col_14     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+  .uib_col_15     { width:42%;}
+  .urow.cright       > .uib_col_15     { padding-left: 0px !important;}
+  .urow:not(.cright) > .uib_col_15     { clear:left; padding-left: 0px !important; }
+  .uib_col_23     { width:42%;}
+  .uib_col_13     { width:14%;}
+  .urow:not(.cright) > .uib_col_13     { padding-right:0px !important;}
+  .urow.cright       > .uib_col_13     { clear:right; padding-right:0px !important; }
+}
+
+@media all and (min-width: @wp_4) and (max-width: @wp_3){
+  .uib_col_14.uib_col_14     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+  .uib_col_15.uib_col_15     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+  .uib_col_23     { width:75%;}
+  .urow.cright       > .uib_col_23     { padding-left: 0px !important;}
+  .urow:not(.cright) > .uib_col_23     { clear:left; padding-left: 0px !important; }
+  .uib_col_13     { width:25%;}
+  .urow:not(.cright) > .uib_col_13     { padding-right:0px !important;}
+  .urow.cright       > .uib_col_13     { clear:right; padding-right:0px !important; }
+}
+
+@media all and (max-width: @wp_3) {
+  .col-1_5-12_5-5_5-5     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+  .col-1_3-12_3-7_3-3     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+  .col-1_3-12_3-7_3-4     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+  .col-1_1-12_1-7_1-4     { width: auto; float: none !important;  clear:both; padding-left:0px !important; padding-right:0px !important; }
+}
